@@ -6,14 +6,18 @@ const rl = readline.createInterface({
 
 let tasks = [];
 
-function printTasks() {
+// Show all tasks
+// To show task, it must start with 'list' input value (command)
+const printTasks = () =>{
   console.log('\n**** To-Do List ****\n');
   tasks.forEach((task, index) => {
     console.log(`${index + 1}. ${task.description} ${task.completed ? '(completed)' : ''}`);
   });
 }
 
-function addTask(description) {
+// Add task
+// To add task, it must start with 'add' input value (command)
+const addTask = (description) => {
   tasks.push({
     description: description,
     completed: false,
@@ -21,17 +25,23 @@ function addTask(description) {
   console.log(`Added "${description}" to the to-do list.\n`);
 }
 
-function removeTask(index) {
+// Remove task
+// To remove task, it must start with 'remove' input value (command)
+const removeTask = (index) => {
   tasks.splice(index, 1);
   console.log(`Removed task ${index + 1} from the to-do list.\n`);
 }
 
-function completeTask(index) {
+// Complete task
+// To complete task, it must start with 'complete' input value (command)
+const completeTask = (index) => {
   tasks[index].completed = true;
-  console.log(`Completed task ${index + 1}.`);
+  console.log(`Completed task ${index + 1}.\n`);
 }
 
-function handleInput(input) {
+// Input tasks on console
+// Use 'quit' command to exit the console
+const consoleInput = (input) => {
   const parts = input.split(' ');
   const command = parts[0];
   const argument = parts.slice(1).join(' ');
@@ -60,6 +70,6 @@ function handleInput(input) {
 rl.setPrompt('Write your Command > ');
 rl.prompt();
 rl.on('line', (input) => {
-  handleInput(input.trim());
+  consoleInput(input.trim());
   rl.prompt();
 });
